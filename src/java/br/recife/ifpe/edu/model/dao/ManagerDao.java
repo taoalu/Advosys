@@ -43,35 +43,28 @@ public class ManagerDao {
 
     public void update(Object o) {
         EntityManager em = emf.createEntityManager();
-
         em.getTransaction().begin();
-
         em.merge(o);
         em.getTransaction().commit();
         em.close();
-    }
+    }        
 
     public List read(String query, Class c) {
-
         EntityManager em = emf.createEntityManager();
-
         List returnedList = em.createQuery(query, c).getResultList();
-
         em.close();
-
         return returnedList;
     }
 
     public void delete(Object o) {
         EntityManager em = emf.createEntityManager();
-
         Object oDelete = o;
 
         if (!em.contains(o)) {
             oDelete = em.merge(o);
         }
-        em.getTransaction().begin();
 
+        em.getTransaction().begin();
         em.remove(oDelete);
         em.getTransaction().commit();
         em.close();

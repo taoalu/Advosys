@@ -5,22 +5,48 @@
  */
 package br.recife.ifpe.edu.model.classes;
 
+import javax.persistence.Access;
+import javax.persistence.AccessType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
+import javax.persistence.Table;
 
 @Entity
+@Table(name = "ADVOGADO")
+@Access(AccessType.FIELD)
 public class Advogado {
 
     @Id
+    @Column(name = "CODIGO")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int codigo;
+    @Column(name = "NOME")
     private String nome;
+    @Column(name = "CPF")
     private String cpf;
+    @Column(name = "OAB")
     private String oab;
+    @Column(name = "ENDERECO")
     private String endereco;
+    @Column(name = "TELEFONE")
     private String telefone;
+
+    public Advogado() {
+    }
+
+    public Advogado(int codigo, String nome, String cpf, String oab, String endereco, String telefone) {
+        this.codigo = codigo;
+        this.nome = nome;
+        this.cpf = cpf;
+        this.oab = oab;
+        this.endereco = endereco;
+        this.telefone = telefone;
+    }        
 
     public int getCodigo() {
         return codigo;
