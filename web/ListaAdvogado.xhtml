@@ -13,7 +13,7 @@
         <ui:include src="Menu.xhtml"/>
 
         <!--selectionMode="single"-->
-        
+
         <center><h2><h:outputText value="Advogados Cadastrados"/></h2></center>
         <h:form id="listaAdvogadosForm">
             <p:dataTable id="tabelaAdvogados" var="item" value="#{advogadoController.readAll()}" 
@@ -42,7 +42,7 @@
                     <h:outputText value="#{item.telefone}"/>
                 </p:column>
                 <p:column width="100">                    
-                    <p:commandButton value="Update" action="#{advogadoController.updateByCodigo()}">
+                    <p:commandButton value="Update" action="#{advogadoController.updateByCodigo()}">                        
                         <f:param name="advogadoSelecionadoCodigo" value="#{item.codigo}" />
                         <f:param name="advogadoSelecionadoCpf" value="#{item.cpf}" />
                         <f:param name="advogadoSelecionadoEndereco" value="#{item.endereco}" />
@@ -52,7 +52,9 @@
                     </p:commandButton>
                 </p:column>
                 <p:column width="90">      
-                    <p:commandButton value="Delete" styleClass="btn btn-danger" />
+                    <p:commandButton value="Delete" action="#{advogadoController.deleteByCodigo(item.codigo)}" update="@form">  
+                        <p:confirm message="Deseja apagar o registro?"/>
+                    </p:commandButton>
                 </p:column>
             </p:dataTable>
             <!--center><h:commandButton value="Add New School" styleClass="btn btn-success btnSpace" /></center-->
@@ -60,6 +62,10 @@
         <p:dialog id="dialogUpdateAdvogado" visible="false" resizable="false" closable="false" closeOnEscape="false" draggable="false" modal="true" widgetVar="widDialogUpdateAdvogado">
             <p:panelGrid columns="2"/>
         </p:dialog>
+        <p:confirmDialog global="true">
+            <p:commandButton value="Sim" styleClass="ui-confirmdialog-yes"/>
+            <p:commandButton value="Não" styleClass="ui-confirmdialog-no"/>
+        </p:confirmDialog>
     </h:body>
 </html>
 

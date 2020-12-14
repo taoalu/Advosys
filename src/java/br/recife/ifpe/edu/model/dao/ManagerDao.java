@@ -47,7 +47,7 @@ public class ManagerDao {
         em.merge(o);
         em.getTransaction().commit();
         em.close();
-    }        
+    }
 
     public List read(String query, Class c) {
         EntityManager em = emf.createEntityManager();
@@ -66,6 +66,16 @@ public class ManagerDao {
 
         em.getTransaction().begin();
         em.remove(oDelete);
+        em.getTransaction().commit();
+        em.close();
+    }
+
+    public void deleteByCodigo(int codigoAdvogado) {
+        EntityManager em = emf.createEntityManager();
+        em.getTransaction().begin();
+        em.createQuery("delete from Advogado a where a.codigo=:codigo")
+                .setParameter("codigo", codigoAdvogado)
+                .executeUpdate();        
         em.getTransaction().commit();
         em.close();
     }

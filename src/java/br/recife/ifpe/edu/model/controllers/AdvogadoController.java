@@ -40,30 +40,30 @@ public class AdvogadoController {
         String query = "Select a from Advogado a";
         return ManagerDao.getCurrentInstance().read(query, Advogado.class);
 
-    }
-
-    public void delete() {
-
-        String query = "Select a from Advogado a";
-        ManagerDao.getCurrentInstance().delete(Advogado.class);
-
-    }
+    }   
 
     public String update() {
         ManagerDao.getCurrentInstance().update(this.objSelecionado);
         return "ListaAdvogado.xhtml";
     }
 
-    public String updateByCodigo() {       
-                
-        objSelecionado = new Advogado(Integer.parseInt(FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("advogadoSelecionadoCodigo")), 
-                FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("advogadoSelecionadoNome"), 
-                FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("advogadoSelecionadoCpf"), 
-                FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("advogadoSelecionadoOab"), 
-                FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("advogadoSelecionadoEndereco"), 
-                FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("advogadoSelecionadoTelefone"));        
+    public String updateByCodigo() {
+
+        objSelecionado = new Advogado(Integer.parseInt(FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("advogadoSelecionadoCodigo")),
+                FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("advogadoSelecionadoNome"),
+                FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("advogadoSelecionadoCpf"),
+                FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("advogadoSelecionadoOab"),
+                FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("advogadoSelecionadoEndereco"),
+                FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("advogadoSelecionadoTelefone"));
 
         return "EditaAdvogado.xhtml";
+    }
+    
+    public String deleteByCodigo(int codigo) {       
+        
+        ManagerDao.getCurrentInstance().deleteByCodigo(codigo);
+        
+        return "ListaAdvogado.xhtml";
     }
 
     public Advogado getAdvogado() {
