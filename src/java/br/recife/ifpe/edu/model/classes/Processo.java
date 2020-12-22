@@ -22,9 +22,8 @@ public class Processo {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int numero;
-    @Temporal(TemporalType.DATE)
-    private Date dataAbertura;
+    private int numero;    
+    private String dataAbertura;
     private String instanciaAtual;
     private int status;
     private String decisaoFinal;
@@ -54,13 +53,13 @@ public class Processo {
         this.numero = numero;
     }
 
-    public Date getDataAbertura() {
+    public String getDataAbertura() {
         return dataAbertura;
     }
 
-    public void setDataAbertura(Date dataAbertura) {
+    public void setDataAbertura(String dataAbertura) {
         this.dataAbertura = dataAbertura;
-    }
+    }   
 
     public String getInstanciaAtual() {
         return instanciaAtual;
@@ -76,7 +75,7 @@ public class Processo {
 
     public void setStatus(int status) {
         this.status = status;
-    }
+    }  
 
     public String getDecisaoFinal() {
         return decisaoFinal;

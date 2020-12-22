@@ -1,0 +1,61 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Facelet Title</title>
+    </h:head>
+    <h:body>
+        <ui:include src="Menu.xhtml"/>
+
+        <center><h2><h:outputText value="Processos Cadastrados"/></h2></center>
+        <h:form id="listaProcessosForm">
+            <p:dataTable id="tabelaProcessos" var="item" value="#{processoController.readAll()}" 
+                         paginator="true" 
+                         rows="20"                         
+                         selection="#{processoController.objSelecionado}"
+                         rowKey="#{item.numero}">              
+                <p:column>
+                    <f:facet name="header">Data Abertura</f:facet>
+                    <h:outputText value="#{item.dataAbertura}"/>
+                </p:column>
+                <p:column>
+                    <f:facet name="header">Decisão Final</f:facet>
+                    <h:outputText value="#{item.decisaoFinal}"/>
+                </p:column>
+                <p:column>
+                    <f:facet name="header">Descrição</f:facet>
+                    <h:outputText value="#{item.descricao}"/>
+                </p:column>               
+                <p:column>
+                    <f:facet name="header">Instância Atual</f:facet>
+                    <h:outputText value="#{item.instanciaAtual}"/>
+                </p:column>
+                <p:column>
+                    <f:facet name="header">Finalizado</f:facet>
+                    <p:selectOneMenu id="comboBox" value="#{item.status}" style="width:120px">
+                        <f:selectItem itemLabel="Sim" itemValue="1" />                        
+                        <f:selectItem itemLabel="Não" itemValue="0" />
+                    </p:selectOneMenu> 
+                </p:column>                
+                <p:column width="90">      
+                    <p:commandButton value="Delete" action="#{processoController.deleteByCodigo(item.numero)}" update="@form">  
+                        <p:confirm message="Deseja apagar o registro?"/>
+                    </p:commandButton>
+                </p:column>
+            </p:dataTable>
+            <!--center><h:commandButton value="Add New School" styleClass="btn btn-success btnSpace" /></center-->
+        </h:form>
+        <p:dialog id="dialogUpdateAdvogado" visible="false" resizable="false" closable="false" closeOnEscape="false" draggable="false" modal="true" widgetVar="widDialogUpdateAdvogado">
+            <p:panelGrid columns="2"/>
+        </p:dialog>
+        <p:confirmDialog global="true">
+            <p:commandButton value="Sim" styleClass="ui-confirmdialog-yes"/>
+            <p:commandButton value="Não" styleClass="ui-confirmdialog-no"/>
+        </p:confirmDialog>
+    </h:body>
+</html>
+

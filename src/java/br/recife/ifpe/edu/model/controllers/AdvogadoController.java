@@ -14,8 +14,7 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 
-/**
- *
+/** 
  * @author taoal
  */
 @ManagedBean
@@ -31,7 +30,7 @@ public class AdvogadoController {
     }
 
     public String insert() {
-        ManagerDao.getCurrentInstance().insert(this.advogado);
+        ManagerDao.getCurrentInstance().insert(this.advogado);        
         return "ListaAdvogado.xhtml";
     }
 
@@ -40,7 +39,7 @@ public class AdvogadoController {
         String query = "Select a from Advogado a";
         return ManagerDao.getCurrentInstance().read(query, Advogado.class);
 
-    }   
+    }
 
     public String update() {
         ManagerDao.getCurrentInstance().update(this.objSelecionado);
@@ -58,11 +57,11 @@ public class AdvogadoController {
 
         return "EditaAdvogado.xhtml";
     }
-    
-    public String deleteByCodigo(int codigo) {       
-        
+
+    public String deleteByCodigo(int codigo) {
+
         ManagerDao.getCurrentInstance().deleteByCodigo(codigo);
-        
+
         return "ListaAdvogado.xhtml";
     }
 

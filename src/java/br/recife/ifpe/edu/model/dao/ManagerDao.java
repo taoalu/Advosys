@@ -5,6 +5,8 @@
  */
 package br.recife.ifpe.edu.model.dao;
 
+import br.recife.ifpe.edu.model.classes.Advogado;
+import br.recife.ifpe.edu.model.classes.Processo;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -75,7 +77,7 @@ public class ManagerDao {
         em.getTransaction().begin();
         em.createQuery("delete from Advogado a where a.codigo=:codigo")
                 .setParameter("codigo", codigoAdvogado)
-                .executeUpdate();        
+                .executeUpdate();
         em.getTransaction().commit();
         em.close();
     }
