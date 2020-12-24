@@ -66,6 +66,17 @@ public class ProcessoController {
         return "EditaProcesso.xhtml";
     }
 
+    public void showDetails() {
+        
+        objSelecionado = new Processo(Integer.parseInt(FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("processoSelecionadoNumero")),
+                FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("processoSelecionadoDataAbertura"),
+                FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("processoSelecionadoInstanciaAtual"),
+                Integer.parseInt(FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("processoSelecionadoStatus")),
+                FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("processoSelecionadoDecisaoFinal"),
+                FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("processoSelecionadoDescricao"));
+        
+    }
+
     public String finalizaProcesso(int numero) {
 
         ManagerDao.getCurrentInstance().finalizaProcesso(numero);

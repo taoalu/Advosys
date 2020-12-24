@@ -48,8 +48,8 @@
                     <p:ajax event="itemSelect" listener="#{inputTextareaView.onSelect}" />
                 </p:inputTextarea>                
 
-            </p:panelGrid>           
-
+           </p:panelGrid>                           
+                        
             <p:commandButton value="Atualizar" action="#{processoController.update()}" update="@form">
                 <p:confirm message="Deseja alterar o processo?"/>
             </p:commandButton>
@@ -59,7 +59,7 @@
         <p:confirmDialog global="true">
             <p:commandButton value="Sim" styleClass="ui-confirmdialog-yes"/>
             <p:commandButton value="Não" styleClass="ui-confirmdialog-no"/>
-        </p:confirmDialog>                   
+        </p:confirmDialog>              
 
     </h:body>
 </html>
