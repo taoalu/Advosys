@@ -12,6 +12,7 @@ import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.faces.context.FacesContext;
 
 /**
  *
@@ -41,28 +42,42 @@ public class ProcessoController {
 
     }
 
+    public List<Processo> readAbertos() {
+
+        String query = "Select p from Processo p where p.status=0";
+        return ManagerDao.getCurrentInstance().read(query, Processo.class);
+
+    }
+
     public String update() {
         ManagerDao.getCurrentInstance().update(this.objSelecionado);
         return "ListaProcesso.xhtml";
     }
 
-//    public String updateByCodigo() {
-//
-//        objSelecionado = new Advogado(Integer.parseInt(FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("advogadoSelecionadoCodigo")),
-//                FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("advogadoSelecionadoNome"),
-//                FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("advogadoSelecionadoCpf"),
-//                FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("advogadoSelecionadoOab"),
-//                FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("advogadoSelecionadoEndereco"),
-//                FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("advogadoSelecionadoTelefone"));
-//
-//        return "EditaAdvogado.xhtml";
-//    }
-    
+    public String updateByCodigo() {
+
+        objSelecionado = new Processo(Integer.parseInt(FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("processoSelecionadoNumero")),
+                FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("processoSelecionadoDataAbertura"),
+                FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("processoSelecionadoInstanciaAtual"),
+                Integer.parseInt(FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("processoSelecionadoStatus")),
+                FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("processoSelecionadoDecisaoFinal"),
+                FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("processoSelecionadoDescricao"));
+
+        return "EditaProcesso.xhtml";
+    }
+
+    public String finalizaProcesso(int numero) {
+
+        ManagerDao.getCurrentInstance().finalizaProcesso(numero);
+
+        return "index.xhtml";
+    }
+
     public String deleteByCodigo(int codigo) {
 
-        ManagerDao.getCurrentInstance().deleteByCodigo(codigo);
+        ManagerDao.getCurrentInstance().deleteByCodigo(codigo, "pro");
 
-        return "ListaAdvogado.xhtml";
+        return "ListaProcesso.xhtml";
     }
 
     public Processo getProcesso() {

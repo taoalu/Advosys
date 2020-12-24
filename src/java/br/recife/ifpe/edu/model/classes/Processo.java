@@ -22,7 +22,7 @@ public class Processo {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int numero;    
+    private int numero;
     private String dataAbertura;
     private String instanciaAtual;
     private int status;
@@ -45,6 +45,19 @@ public class Processo {
         this.historico = new ArrayList<Historico>();
     }
 
+    public Processo(int numero, String dataAbertura, String instanciaAtual, int status, String decisaoFinal, String descricao) {
+        this.numero = numero;
+        this.dataAbertura = dataAbertura;
+        this.instanciaAtual = instanciaAtual;
+        this.status = status;
+        this.decisaoFinal = decisaoFinal;
+        this.descricao = descricao;
+        this.clientes = clientes;
+        this.advogados = advogados;
+        this.leis = leis;
+        this.historico = historico;
+    }
+
     public int getNumero() {
         return numero;
     }
@@ -59,7 +72,7 @@ public class Processo {
 
     public void setDataAbertura(String dataAbertura) {
         this.dataAbertura = dataAbertura;
-    }   
+    }
 
     public String getInstanciaAtual() {
         return instanciaAtual;
@@ -75,7 +88,7 @@ public class Processo {
 
     public void setStatus(int status) {
         this.status = status;
-    }  
+    }
 
     public String getDecisaoFinal() {
         return decisaoFinal;

@@ -21,6 +21,18 @@ public class Cliente {
     private String endereco;
     private String telefone;
 
+    public Cliente(int codigo, String nome, String cpfcnpj, String endereco, String telefone) {
+        this.codigo = codigo;
+        this.nome = nome;
+        this.cpfcnpj = cpfcnpj;
+        this.endereco = endereco;
+        this.telefone = telefone;
+    }      
+
+    public Cliente() {
+        
+    }       
+
     public int getCodigo() {
         return codigo;
     }

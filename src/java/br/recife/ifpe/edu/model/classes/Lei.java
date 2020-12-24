@@ -21,6 +21,18 @@ public class Lei {
     private int capitulo;
     private String artigo;
 
+    public Lei(int codigo, String descricao, String tipo, int capitulo, String artigo) {
+        this.codigo = codigo;
+        this.descricao = descricao;
+        this.tipo = tipo;
+        this.capitulo = capitulo;
+        this.artigo = artigo;
+    }
+
+    public Lei() {
+        
+    }        
+
     public int getCodigo() {
         return codigo;
     }

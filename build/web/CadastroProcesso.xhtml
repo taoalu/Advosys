@@ -34,19 +34,21 @@
                 <p:message for="editInstanciaAtual"/>   
 
                 <h:outputText value="Finalizado"/>
-                <h:inputText id="editStatus" value="#{processoController.processo.status}"
-                             required="true" 
-                             requiredMessage="Campo obrigatório!"/>
-                <p:message for="editInstanciaAtual"/>                   
+                <p:selectOneMenu id="comboBox" value="#{processoController.processo.status}" style="width:225px">
+                    <f:selectItem itemLabel="Sim" itemValue="1" />                        
+                    <f:selectItem itemLabel="Não" itemValue="0" />
+                </p:selectOneMenu>
+                <p:message for="editInstanciaAtual"/>
 
                 <h:outputText value="Descrição"/>
                 <p:inputTextarea rows="10" cols="50" queryDelay="750" minQueryLength="4" value="#{processoController.processo.descricao}">
                     <p:ajax event="itemSelect" listener="#{inputTextareaView.onSelect}" />
                 </p:inputTextarea>                
+
             </p:panelGrid>           
 
             <p:commandButton value="Cadastrar" action="#{processoController.insert()}" update="@form">
-                <p:confirm message="Deseja cadastrar o advodado?"/>
+                <p:confirm message="Deseja cadastrar o processo?"/>
             </p:commandButton>
 
         </h:form>

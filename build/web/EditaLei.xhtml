@@ -2,44 +2,54 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:p="http://primefaces.org/ui"
-      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
     <h:head>
         <title>Facelet Title</title>
     </h:head>
-    <h:body>        
+    <h:body>
 
         <ui:include src="Menu.xhtml"/>
 
-        <h:form id="formCadastroLei">
+        <h:form id="updateLei">
+
             <p:panelGrid columns="3">                                   
+                <h:outputText value="Código"/>
+                <h:outputText value="#{leiController.objSelecionado.codigo}"/>
+                <h:outputText value=""/>
+
                 <h:outputText value="Tipo"/>
-                <h:inputText id="editTipo" value="#{leiController.lei.tipo}"
+                <h:inputText id="editTipo" value="#{leiController.objSelecionado.tipo}"                             
                              required="true" 
                              requiredMessage="Campo obrigatório!"/>
                 <p:message for="editTipo"/>
 
                 <h:outputText value="Capítulo"/>
-                <h:inputText id="editCapitulo" value="#{leiController.lei.capitulo}"
+                <h:inputText id="editCapitulo" value="#{leiController.objSelecionado.capitulo}"                              
                              required="true" 
                              requiredMessage="Campo obrigatório!"/>
-                <p:message for="editCapitulo"/>     
+                <p:message for="editCapitulo"/>
 
                 <h:outputText value="Artigo"/>
-                <h:inputText id="editArtigo" value="#{leiController.lei.artigo}"
+                <h:inputText id="editArtigo" value="#{leiController.objSelecionado.artigo}"                              
                              required="true" 
                              requiredMessage="Campo obrigatório!"/>
                 <p:message for="editArtigo"/>
 
                 <h:outputText value="Descrição"/>
-                <p:inputTextarea rows="10" cols="50" queryDelay="750" minQueryLength="4" value="#{leiController.lei.descricao}">
-                    <p:ajax event="itemSelect" listener="#{inputTextareaView.onSelect}" />
-                </p:inputTextarea>   
-                
+                <p:editor id="editDescricao" value="#{leiController.objSelecionado.descricao}"                              
+                             required="true" 
+                             requiredMessage="Campo obrigatório!"/>
+                <p:message for="editDescricao"/>
+
             </p:panelGrid>
 
-            <p:commandButton value="Cadastrar" action="#{leiController.insert()}" update="@form">
-                <p:confirm message="Deseja cadastrar a lei?"/>
+            <p:commandButton value="Salvar" action="#{leiController.update()}" update="@form">
+                <p:confirm message="Deseja alterar a lei?"/>
+            </p:commandButton>
+
+            <p:commandButton value="Cancelar" update="@form">
+                <p:confirm message="Deseja alterar a lei?"/>
             </p:commandButton>
 
         </h:form>
@@ -48,7 +58,6 @@
             <p:commandButton value="Sim" styleClass="ui-confirmdialog-yes"/>
             <p:commandButton value="Não" styleClass="ui-confirmdialog-no"/>
         </p:confirmDialog>
-
     </h:body>
 </html>
 

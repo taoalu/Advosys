@@ -60,7 +60,7 @@ public class AdvogadoController {
 
     public String deleteByCodigo(int codigo) {
 
-        ManagerDao.getCurrentInstance().deleteByCodigo(codigo);
+        ManagerDao.getCurrentInstance().deleteByCodigo(codigo,"adv");
 
         return "ListaAdvogado.xhtml";
     }

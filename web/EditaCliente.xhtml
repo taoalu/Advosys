@@ -2,52 +2,60 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:p="http://primefaces.org/ui"
-      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
     <h:head>
-        <title>Cadastro Cliente</title>
+        <title>Facelet Title</title>
     </h:head>
     <h:body>
         <ui:include src="Menu.xhtml"/>
 
-        <h:form id="formCadastroCliente">
+        <h:form id="updateAdvogado">
             <p:panelGrid columns="3">                                   
+                <h:outputText value="Código"/>
+                <h:outputText value="#{clienteController.objSelecionado.codigo}"/>
+                <h:outputText value=""/>
+
                 <h:outputText value="Nome"/>
-                <h:inputText id="editNome" value="#{clienteController.cliente.nome}"
+                <h:inputText id="editNome" value="#{clienteController.objSelecionado.nome}"                             
                              required="true" 
                              requiredMessage="Campo obrigatório!"/>
                 <p:message for="editNome"/>
 
-                <h:outputText value="CPF"/>
-                <h:inputText id="editCPF" value="#{clienteController.cliente.cpfcnpj}"                              
+                <h:outputText value="CPF/CNPJ"/>
+                <h:inputText id="editCPF" value="#{clienteController.objSelecionado.cpfcnpj}"                              
                              required="true" 
                              requiredMessage="Campo obrigatório!"/>
                 <p:message for="editCPF"/>
-               
+
                 <h:outputText value="Endereço"/>
-                <h:inputText id="editEndereco" value="#{clienteController.cliente.endereco}"                              
+                <h:inputText id="editEndereco" value="#{clienteController.objSelecionado.endereco}"                              
                              required="true" 
                              requiredMessage="Campo obrigatório!"/>
                 <p:message for="editEndereco"/>
 
                 <h:outputText value="Telefone"/>
-                <h:inputText id="editTelefone" value="#{clienteController.cliente.telefone}" 
+                <h:inputText id="editTelefone" value="#{clienteController.objSelecionado.telefone}"                              
                              required="true" 
                              requiredMessage="Campo obrigatório!"/>
                 <p:message for="editTelefone"/>
+            
             </p:panelGrid>
-
-            <p:commandButton value="Cadastrar" action="#{clienteController.insert()}" update="@form">
-                <p:confirm message="Deseja cadastrar o advodado?"/>
+            
+            <p:commandButton value="Salvar" action="#{clienteController.update()}" update="@form">
+                <p:confirm message="Deseja alterar o cliente?"/>
             </p:commandButton>
-
+            
+            <p:commandButton value="Cancelar" update="@form">
+                <p:confirm message="Deseja alterar o cliente?"/>
+            </p:commandButton>
+            
         </h:form>
 
         <p:confirmDialog global="true">
             <p:commandButton value="Sim" styleClass="ui-confirmdialog-yes"/>
             <p:commandButton value="Não" styleClass="ui-confirmdialog-no"/>
         </p:confirmDialog>
-        
     </h:body>
 </html>
 

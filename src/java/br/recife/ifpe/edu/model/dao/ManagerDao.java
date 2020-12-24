@@ -72,11 +72,40 @@ public class ManagerDao {
         em.close();
     }
 
-    public void deleteByCodigo(int codigoAdvogado) {
+    public void deleteByCodigo(int codigoAdvogado, String obj) {
         EntityManager em = emf.createEntityManager();
         em.getTransaction().begin();
-        em.createQuery("delete from Advogado a where a.codigo=:codigo")
-                .setParameter("codigo", codigoAdvogado)
+
+        if (obj.equals("adv")) {
+            em.createQuery("delete from Advogado a where a.codigo=:codigo")
+                    .setParameter("codigo", codigoAdvogado)
+                    .executeUpdate();
+        }
+        if (obj.equals("cli")) {
+            em.createQuery("delete from Cliente a where a.codigo=:codigo")
+                    .setParameter("codigo", codigoAdvogado)
+                    .executeUpdate();
+        }
+        if (obj.equals("lei")) {
+            em.createQuery("delete from Lei a where a.codigo=:codigo")
+                    .setParameter("codigo", codigoAdvogado)
+                    .executeUpdate();
+        }
+        if (obj.equals("pro")) {
+            em.createQuery("delete from Processo a where a.numero=:codigo")
+                    .setParameter("codigo", codigoAdvogado)
+                    .executeUpdate();
+        }
+
+        em.getTransaction().commit();
+        em.close();
+    }
+
+    public void finalizaProcesso(int numeroProcesso) {
+        EntityManager em = emf.createEntityManager();
+        em.getTransaction().begin();
+        em.createQuery("update Processo p set p.status = 1 where p.numero=:numero")
+                .setParameter("numero", numeroProcesso)
                 .executeUpdate();
         em.getTransaction().commit();
         em.close();

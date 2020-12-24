@@ -11,12 +11,12 @@
     <h:body>    
         <ui:include src="Menu.xhtml"/>
         <center><h2><h:outputText value="Processos em Andamento"/></h2></center>
-        <h:form id="listaProcessosHome">
-            <p:dataTable id="tabelaAdvogados" var="item" value="#{processoController.readAll()}" 
+        <h:form id="listaProcessosForm">
+            <p:dataTable id="tabelaProcessos" var="item" value="#{processoController.readAbertos()}" 
                          paginator="true" 
                          rows="20"                         
-                         selection="#{advogadoController.objSelecionado}"
-                         rowKey="#{item.codigo}">              
+                         selection="#{processoController.objSelecionado}"
+                         rowKey="#{item.numero}">              
                 <p:column>
                     <f:facet name="header">Data Abertura</f:facet>
                     <h:outputText value="#{item.dataAbertura}"/>
@@ -33,8 +33,13 @@
                     <f:facet name="header">Instância Atual</f:facet>
                     <h:outputText value="#{item.instanciaAtual}"/>
                 </p:column>
-            </p:dataTable>            
-        </h:form>                
+
+                <p:column width="110">                                                             
+                    <p:commandButton update="@form" value="Finalizar" action="#{processoController.finalizaProcesso(item.numero)}"/>
+                </p:column>
+
+            </p:dataTable>
+        </h:form>             
     </h:body>
 </html>
 
